@@ -122,6 +122,63 @@ body{font-family:'Barlow',sans-serif;background:var(--navy);min-height:100vh;ove
     <div class="header-sub">Select an activity to launch it</div>
   </div>
 
+  <!-- ── BALDRIGE COUNTDOWNS ── -->
+<div style="
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  padding:18px 24px;background:rgba(13,29,65,.85);
+  border-bottom:2px solid #D4A853;font-family:sans-serif;
+">
+  <!-- Virtual Site Visit -->
+  <div style="text-align:center;min-width:220px;">
+    <div style="font-size:10px;letter-spacing:.2em;color:#D4A853;text-transform:uppercase;margin-bottom:4px;">
+      🖥 Virtual Site Visit
+    </div>
+    <div id="cd-virtual" style="font-size:clamp(22px,4vw,32px);font-weight:900;color:#fff;letter-spacing:.04em;">
+      --d --h --m --s
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;">September 28, 2026</div>
+  </div>
+
+  <div style="width:1px;background:rgba(212,168,83,.25);margin:4px 0;"></div>
+
+  <!-- On-Site Visit -->
+  <div style="text-align:center;min-width:220px;">
+    <div style="font-size:10px;letter-spacing:.2em;color:#D4A853;text-transform:uppercase;margin-bottom:4px;">
+      🏛 On-Site Visit
+    </div>
+    <div id="cd-onsite" style="font-size:clamp(22px,4vw,32px);font-weight:900;color:#fff;letter-spacing:.04em;">
+      --d --h --m --s
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;">October 20, 2026</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var targets = {
+    'cd-virtual': new Date('2026-09-28T08:00:00'),
+    'cd-onsite':  new Date('2026-10-20T08:00:00')
+  };
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var now = Date.now();
+    Object.keys(targets).forEach(function(id){
+      var diff = targets[id] - now;
+      var el = document.getElementById(id);
+      if(!el) return;
+      if(diff <= 0){ el.textContent = '🎯 TODAY'; el.style.color='#F3C300'; return; }
+      var d = Math.floor(diff/86400000);
+      var h = Math.floor((diff%86400000)/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = d+'d '+pad(h)+'h '+pad(m)+'m '+pad(s)+'s';
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
   <div class="grid">
 
     <!-- PHARR WAY PATH GAME -->
